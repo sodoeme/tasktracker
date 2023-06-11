@@ -33,6 +33,16 @@ app.use(
 app.use('/tasks', taskRoutes)
 app.use('/', loginRoutes)
 app.use('/signup', signUpRoutes)
+app.post('/signout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("here")
+      res.redirect('/'); 
+    }
+  });
+});
 
 
 mongoose.connection.once('open', ()=>{

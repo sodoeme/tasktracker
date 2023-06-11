@@ -3,29 +3,30 @@ const Task = require('../models/task')
 
 
 exports.getAllTasks = async (req, res) => {
-
-   const tasks = await Task.find()
+const name = req.session.name
+    const author = req.session.user
+       const tasks = await Task.find({author: author })
 
     
-    res.render('task', {tasks})
+    res.render('task', {tasks, name})
 
  
 
 }
 
 
-
 exports.editTask = async (req, res) => {
-    
-    const updatedTask = new Task(req.body)
-
-    const task = await Task.findById(taskId)
+    const id = req.params.id
+    const des = req.body.des
+    console.log(id)
+    const task = await Task.findById(id)
     if(!task){
         return
     }
-    const success = await task.updateOne(updatedTask)
+    const success = await task.updateOne({des: des})
     if(success){
         //reload page
+        res.redirect('/tasks')
     }
     else{
         
@@ -33,6 +34,21 @@ exports.editTask = async (req, res) => {
 
 
 };
+
+exports.changeEdit = async (req, res) => {
+    const name = req.session.name
+
+  const edit =2
+  const id = req.params.id
+  const tasks = await Task.find()
+
+    
+
+  res.render('task', {edit, id, tasks, name})
+
+
+};
+
 
 
 exports.createTask = async (req, res) => {
@@ -64,7 +80,9 @@ exports.delete = async (req, res) => {
     }
     const exist = await Task.findById(id)
     if(!exist){
+        res.redirect('/tasks')
         console.log("not found")
+        return
         
     }
 

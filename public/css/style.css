@@ -1,10 +1,15 @@
 body{
     background-color:bisque;
+ 
+}
+.container{
     display: flex;
     justify-content: center;
 }
-
-#task-input{
+.row{
+    margin-top: 2VW;
+}
+input[type="text"]{
 width: 60%;
 border: none;
 background-color: #555555;
@@ -23,15 +28,6 @@ border-radius: 10px;
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
-}
-.task-desc{
-display: inline-block;
-width: 60%;
-border: none;
-background-color: #555555;
-padding: 15px 32px;
-color: white;
-border-radius: 10px;
 }
 
 #task-submit{
@@ -52,5 +48,38 @@ border-radius: 10px;
     width: 50%;
 }
 
-form{
-}
+  /* Header styles */
+  header {
+    background-color: #333;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+  }
+
+  header h3 {
+    margin: 0;
+  }
+
+  header button {
+    background-color: #555555;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* Content styles */
+  .content {
+    padding: 20px;
+  }
+
+  h1 {
+    margin-top: 0;
+  }
+
+  /* Rest of your existing styles */
+
+  

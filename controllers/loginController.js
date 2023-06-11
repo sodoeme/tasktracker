@@ -16,23 +16,27 @@ exports.getUserLogin = async (req, res) => {
 exports.login = async (req, res) => {
     // Get user from DB
     let email = req.body.email
-    if(email)
-    email = email.toLowerCase()
+    if (email)
+        email = email.toLowerCase()
     let password = req.body.password;
 
-    const user = await User.findOne({email: email})
+    const user = await User.findOne({ email: email })
 
-    if(!user){
+    if (!user) {
         res.redirect('/')
+        return
     }
     const checkPwrd = user.comparePassword(password)
-    if(!checkPwrd){
+    if (!checkPwrd) {
         res.redirect('/')
+        return
     }
 
     req.session.user = user._id
+    req.session.name= user.fname +' '+user.lname
     console.log(req.session.user)
     res.redirect('/tasks')
 
-  
+
 };
+
