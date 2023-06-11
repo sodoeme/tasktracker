@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
+const {isLoggedIn} = require('../middleware/isLoggedIn')
 const taskController = require('../controllers/taskController')
-
 router.route('/')
-    .get(taskController.getAllTasks)
+    .get( isLoggedIn, taskController.getAllTasks)
     
     .post(taskController.createTask)
 router.route('/:id')

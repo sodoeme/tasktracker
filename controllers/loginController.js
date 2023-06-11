@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt')
 
 
 exports.getUserLogin = async (req, res) => {
-    console.log("here")
     return res.render('login');
 
 }
@@ -23,15 +22,19 @@ exports.login = async (req, res) => {
     const user = await User.findOne({ email: email })
 
     if (!user) {
-        res.redirect('/')
+        res.send('<script>alert("Invalid credentials")</script>' + 
+        '<script>window.location.href = "/"</script>')
+    
         return
     }
-    const checkPwrd = user.comparePassword(password)
+    const checkPwrd =  await user.comparePassword(password)
     if (!checkPwrd) {
-        res.redirect('/')
+        res.send('<script>alert("Invalid credentials")</script>' + 
+        '<script>window.location.href = "/"</script>')
         return
     }
 
+    console.log(checkPwrd)
     req.session.user = user._id
     req.session.name= user.fname +' '+user.lname
     console.log(req.session.user)
