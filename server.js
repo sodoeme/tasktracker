@@ -8,7 +8,7 @@ const connectDB = require('./config/dbConn')
 const session = require('express-session');
 const taskRoutes = require('./routes/taskRoutes')
 const loginRoutes = require('./routes/loginRoutes')
-const signUpRoutes = require('./routes/signUpROutes')
+const signUpRoutes = require('./routes/signUpRoutes')
 
 
 const app = express()
